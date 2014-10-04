@@ -6,8 +6,8 @@
 	= javascript_include_tag 'application', 'data-turbolinks-track' => true
 	= csrf_meta_tags
 %body
-	.container-fluid
-		= render :partial => 'common/navbar'
+	= render :partial => 'common/navbar'
+	.container
 		= notice_message
 		= yield
 	= render :partial => 'common/footer'

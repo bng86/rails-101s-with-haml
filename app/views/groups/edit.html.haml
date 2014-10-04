@@ -1,8 +1,7 @@
-.container
-	%h1 Edit Group
+%h1 Edit Group
+%hr
+= simple_form_for @group do |f|
+	= f.input :title, :input_html => { :class => "form-control"}
+	= f.input :description, :input_html => { :class => "form-control"}
 	%hr
-	= simple_form_for @group do |f|
-		= f.input :title, :input_html => { :class => "form-control"}
-		= f.input :description, :input_html => { :class => "form-control"}
-		%hr
-		= f.submit "Submit", :disable_with => 'Submitting...', :class => "btn btn-primary"
+	= f.submit "Submit", :disable_with => 'Submitting...', :class => "btn btn-primary"

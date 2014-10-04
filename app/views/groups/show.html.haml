@@ -1,8 +1,21 @@
-.container
-	.clearfix
-		= link_to("Edit", edit_group_path(@group), :class => "btn btn-primary pull-right")
-	%hr
-	%h2 
-		= @group.title
-	%p 
-		= @group.description
+.clearfix
+	= link_to("New Post", new_group_post_path(@group), :class => "btn btn-info pull-right")
+	= link_to("Edit", edit_group_path(@group), :class => "btn btn-primary pull-right")	
+%hr
+%h2 
+	= @group.title
+%p 
+	= @group.description
+%table.table.table-bordered.table-striped
+	%thead
+		%tr
+			%th Post
+			%th(colspan="2") Action
+	%tbody
+		- @posts.each do |post|
+			%tr
+				%td
+					= post.content
+				%td
+					= link_to("Edit", edit_group_post_path(post.group, post), :class => "btn btn-default")
+					= link_to("Delete", group_post_path(post.group, post), :class => "btn btn-danger", :method => :delete, data: { confirm: "Are you sure?"})

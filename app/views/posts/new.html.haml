@@ -1,0 +1,6 @@
+%h1 New Post
+= simple_form_for [@group, @post] do |f|
+	= f.input :content, :input_html => { :class => "form-control"}
+	%hr
+	.form-actions
+		= f.submit "Submit", :disable_with => 'Submitting...', :class => "btn btn-primary"
