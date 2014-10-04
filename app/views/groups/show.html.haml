@@ -1,0 +1,8 @@
+.container
+	.clearfix
+		= link_to("Edit", edit_group_path(@group), :class => "btn btn-primary pull-right")
+	%hr
+	%h2 
+		= @group.title
+	%p 
+		= @group.description
