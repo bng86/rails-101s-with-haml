@@ -9,13 +9,20 @@
 %table.table.table-bordered.table-striped
 	%thead
 		%tr
+			%th #
 			%th Post
+			%th Created
 			%th(colspan="2") Action
 	%tbody
-		- @posts.each do |post|
+		- @posts.each_with_index do |post, i|
 			%tr
+				%td
+					= i + 1
 				%td
 					= post.content
 				%td
-					= link_to("Edit", edit_group_post_path(post.group, post), :class => "btn btn-default")
-					= link_to("Delete", group_post_path(post.group, post), :class => "btn btn-danger", :method => :delete, data: { confirm: "Are you sure?"})
+					= current_user.name
+				%td
+					- if current_user && post.editable_by?(current_user)
+						= link_to("Edit", edit_group_post_path(post.group, post), :class => "btn btn-default")
+						= link_to("Delete", group_post_path(post.group, post), :class => "btn btn-danger", :method => :delete, data: { confirm: "Are you sure?"})
