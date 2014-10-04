@@ -1,6 +1,13 @@
 .clearfix
 	= link_to("New Post", new_group_post_path(@group), :class => "btn btn-info pull-right")
-	= link_to("Edit", edit_group_path(@group), :class => "btn btn-primary pull-right")	
+	- if @group.editable_by?(current_user)
+		= link_to("Edit", edit_group_path(@group), :class => "btn btn-primary pull-right")	
+
+	- if !current_user.nil?
+		- if current_user.is_member_of?(@group)
+			= link_to("Quit Group", quit_group_path(@group), :method => :post, :class => "btn btn-info")
+		- else
+			= link_to("Join Group", join_group_path(@group), :method => :post, :class => "btn btn-info")
 %hr
 %h2 
 	= @group.title
@@ -21,7 +28,7 @@
 				%td
 					= post.content
 				%td
-					= current_user.name
+					= @group.get_owner
 				%td
 					- if current_user && post.editable_by?(current_user)
 						= link_to("Edit", edit_group_post_path(post.group, post), :class => "btn btn-default")
