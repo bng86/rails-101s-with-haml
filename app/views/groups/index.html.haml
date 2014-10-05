@@ -1,23 +1,24 @@
-.container
-	%h1 Hello, Rails 101!
-	.clearfix
-		= link_to("New Group", new_group_path , :class => "btn btn-primary pull-right")	
-	%hr		
-	%table.table.table-bordered.table-striped
-		%thead
+%h1 Hello, Rails 101!
+.clearfix
+	= link_to("New Group", new_group_path , :class => "btn btn-primary pull-right")	
+%hr		
+%table.table.table-bordered.table-striped
+	%thead
+		%tr
+			%th #
+			%th Title
+			%th Description
+			%th Action
+	%tbody
+		- @groups.each_with_index do |group, i|
 			%tr
-				%th #
-				%th Title
-				%th Description
-				%th Action
-		%tbody
-			- @groups.each do |group|
-				%tr
-					%td #
-					%td
-						= link_to(group.title, group_path(group))
-					%td
-						= group.description
-					%td
+				%td
+					= i + 1
+				%td
+					= link_to(group.title, group_path(group))
+				%td
+					= group.description
+				%td
+					- if current_user && group.editable_by?(current_user)
 						= link_to("Edit", group_path(group), :class => "btn btn-default")
 						= link_to("Delete", group_path(group), :class => "btn btn-danger", :method=>:delete, data: { confirm: "Are you sure?"})

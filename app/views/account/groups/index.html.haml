@@ -1,0 +1,25 @@
+%h2.text-center My Gourps
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th #
+      %th Title
+      %th Description
+      %th Post Count
+      %th Owner
+      %th Last Update   
+  %tbody
+    - @groups.each_with_index do |group, i|
+      %tr
+        %td 
+          = i + 1
+        %td
+          = link_to(group.title, group_path(group))
+        %td
+          = group.description
+        %td
+          = group.posts.size
+        %td
+          = group.get_owner
+        %td
+          = group.updated_at
